@@ -1,0 +1,69 @@
+-есть вот такая модель  
+type SignUpModel struct { 
+	FirstName string `json:"firstName"` 
+	LastName  string `json:"lastName"` 
+	UserName  string `json:"username"` 
+	Email     string `json:"email"` 
+	Password  string `json:"password"` 
+} 
+нужно написать функцию для првоерки что она зполнена данными
+
+
+Конечно! Вот пример функции на языке Go, которая проверяет, что все поля в структуре  `SignUpModel`  заполнены данными:
+package main
+
+import (
+	"errors"
+	"fmt"
+)
+
+type SignUpModel struct {
+	FirstName string `json:"firstName"`
+	LastName  string `json:"lastName"`
+	UserName  string `json:"username"`
+	Email     string `json:"email"`
+	Password  string `json:"password"`
+}
+
+// Функция для проверки заполненности полей в SignUpModel
+func IsSignUpModelValid(signUpModel SignUpModel) error {
+	if signUpModel.FirstName == "" {
+		return errors.New("Поле 'firstName' не заполнено")
+	}
+	if signUpModel.LastName == "" {
+		return errors.New("Поле 'lastName' не заполнено")
+	}
+	if signUpModel.UserName == "" {
+		return errors.New("Поле 'username' не заполнено")
+	}
+	if signUpModel.Email == "" {
+		return errors.New("Поле 'email' не заполнено")
+	}
+	if signUpModel.Password == "" {
+		return errors.New("Поле 'password' не заполнено")
+	}
+	return nil
+}
+
+func main() {
+	signUpModel := SignUpModel{
+		FirstName: "John",
+		LastName:  "Doe",
+		UserName:  "johndoe",
+		Email:     "johndoe@example.com",
+		Password:  "password123",
+	}
+
+	err := IsSignUpModelValid(signUpModel)
+	if err != nil {
+		fmt.Println("Ошибка при проверке SignUpModel:", err)
+		return
+	}
+
+	fmt.Println("SignUpModel заполнена корректно")
+}
+В этом примере мы определяем функцию  `IsSignUpModelValid` , которая принимает экземпляр  `SignUpModel`  и проверяет, что все его поля заполнены. Если какое-либо поле пустое, функция возвращает ошибку с соответствующим сообщением.
+
+В функции  `main`  мы создаем экземпляр  `SignUpModel`  с заполненными данными и вызываем функцию  `IsSignUpModelValid`  для проверки его корректности. Если функция возвращает ошибку, выводим соответствующее сообщение. Если все поля заполнены, выводим сообщение о том, что  `SignUpModel`  заполнена корректно.
+
+Надеюсь, это поможет вам! Если у вас есть еще вопросы, не стесняйтесь задавать.
