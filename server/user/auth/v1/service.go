@@ -18,7 +18,10 @@ func SignUpService(c *fiber.Ctx) error {
 	}
 
 	if !CheckUniqueUsername(data.UserName) {
-		fmt.Println("CheckUniqueUsername")
+		return UniqueUsernameError(c)
+	}
+	if !CheckEmailUnique(data.Email) {
+		return UniqueEmailError(c)
 	}
 
 	var profile models.Profile = models.Profile{}

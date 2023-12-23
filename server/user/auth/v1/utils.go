@@ -14,3 +14,10 @@ func CheckUniqueUsername(username string) bool {
 	res := db.Where("user_name = ?", username).First(&user)
 	return errors.Is(res.Error, gorm.ErrRecordNotFound)
 }
+
+func CheckEmailUnique(email string) bool {
+	db := global.GetDataBase()
+	var user models.User
+	res := db.Where("email =?", email).First(&user)
+	return errors.Is(res.Error, gorm.ErrRecordNotFound)
+}
