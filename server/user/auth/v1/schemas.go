@@ -13,6 +13,17 @@ type SignInModel struct {
 	Password string `json:"password"`
 }
 
+
+func (m *SignInModel) IsValid() int {
+	if m.Email == "" {
+		return 1
+	}
+	if m.Password == "" {
+		return 2
+	}
+	return 0
+}
+
 // Функция для проверки заполненности полей в SignUpModel
 func (signUpModel *SignUpModel) IsValid() int {
 	if signUpModel.FirstName == "" {

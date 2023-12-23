@@ -13,5 +13,4 @@ type Notification struct {
 	Content            string           `gorm:"column:content"`
 	NotificationType   NotificationType `gorm:"foreignkey:NotificationTypeID"`
 	NotificationTypeID int              `gorm:"column:notification_type_id"`
-	UserID             int              `gorm:"column:user_id"`
 }

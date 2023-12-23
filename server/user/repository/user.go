@@ -1,13 +1,18 @@
 package repository
 
-import "gorm.io/gorm"
+import (
+	"fmt"
+
+	"github.com/gofiber/fiber/v2"
+	"gorm.io/gorm"
+)
 
 type User struct {
 	gorm.Model
 	FirstName         string          `gorm:"column:first_name"`
 	LastName          string          `gorm:"column:last_name"`
 	Email             string          `gorm:"column:email"`
-	password          string          `gorm:"column:password"`
+	Password          string          `gorm:"column:password"`
 	UserName          string          `gorm:"column:user_name"`
 	EmailValidationID int             `gorm:"column:email_validation_id"`
 	EmailValidation   EmailValidation `gorm:"foreignkey:EmailValidationID"`
@@ -26,9 +31,20 @@ type User struct {
 }
 
 func (u *User) SetPassword(password string) {
-	u.password = password
+	u.Password = password
+	fmt.Println(u.Password)
 }
 
 func (u *User) CheckPassword(password string) bool {
-	return u.password == password
+	return u.Password == password
+}
+
+func (u *User) JSON() fiber.Map {
+	return fiber.Map{
+		"id":         u.ID,
+		"first_name": u.FirstName,
+		"last_name":  u.LastName,
+		"email":      u.Email,
+		"username":   u.UserName,
+	}
 }
