@@ -17,6 +17,7 @@ func MeService(c *fiber.Ctx) error {
 	}
 
 	payload, _ := global.DecodeToken(data.Token)
+	fmt.Println(data.Token)
 	fmt.Println(payload)
 
 	var user_id int = int(payload["user_id"].(float64))

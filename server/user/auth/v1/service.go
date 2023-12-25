@@ -1,6 +1,7 @@
 package v1
 
 import (
+	"fmt"
 	"user/global"
 	models "user/repository"
 
@@ -65,6 +66,7 @@ func SignUpService(c *fiber.Ctx) error {
 	}
 
 	if !CheckUniqueUsername(data.UserName) {
+		fmt.Println("usrname")
 		return UniqueUsernameError(c)
 	}
 	if !CheckEmailUnique(data.Email) {
